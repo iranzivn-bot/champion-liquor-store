@@ -1,0 +1,203 @@
+/**
+ * Reports Module Stylesheet
+ *
+ * Champion Liquor Store Ltd - Admin Reports UI
+ *
+ * Colors:
+ *   Primary Navy   : #001F5B
+ *   Gold           : #C9A227
+ *   Green          : #0B6B2F
+ *   White          : #FFFFFF
+ *   Background     : #F5F6FA
+ */
+
+/* ─── Report Stat Cards ──────────────────────────────── */
+.rp-stat-card {
+    background: #fff;
+    border-radius: var(--admin-radius, 8px);
+    box-shadow: var(--admin-shadow, 0 2px 4px rgba(0,0,0,0.08));
+    padding: 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    border-left: 4px solid #6B7280;
+    transition: transform 0.2s;
+}
+.rp-stat-card:hover {
+    transform: translateY(-2px);
+}
+.rp-stat-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    flex-shrink: 0;
+}
+.rp-stat-body {
+    flex: 1;
+    min-width: 0;
+}
+.rp-stat-number {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #001F5B;
+    display: block;
+    line-height: 1.2;
+}
+.rp-stat-label {
+    font-size: 0.8rem;
+    color: #6B7280;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+.rp-stat-revenue    { border-left-color: #0B6B2F; }
+.rp-stat-revenue .rp-stat-icon { background: #e8f5e9; color: #0B6B2F; }
+.rp-stat-orders     { border-left-color: #001F5B; }
+.rp-stat-orders .rp-stat-icon { background: #e3e8f0; color: #001F5B; }
+.rp-stat-customers  { border-left-color: #C9A227; }
+.rp-stat-customers .rp-stat-icon { background: #fdf5e0; color: #C9A227; }
+.rp-stat-products   { border-left-color: #8B5CF6; }
+.rp-stat-products .rp-stat-icon { background: #f3eeff; color: #8B5CF6; }
+.rp-stat-pending    { border-left-color: #F59E0B; }
+.rp-stat-pending .rp-stat-icon { background: #fff8e6; color: #F59E0B; }
+.rp-stat-delivered  { border-left-color: #0B6B2F; }
+.rp-stat-delivered .rp-stat-icon { background: #e8f5e9; color: #0B6B2F; }
+.rp-stat-lowstock   { border-left-color: #dc3545; }
+.rp-stat-lowstock .rp-stat-icon { background: #fde8ea; color: #dc3545; }
+
+/* ─── Report Filters Bar ────────────────────────────── */
+.rp-filters {
+    background: #fff;
+    border-radius: var(--admin-radius);
+    box-shadow: var(--admin-shadow);
+    padding: 1rem 1.25rem;
+    margin-bottom: 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: 0.75rem;
+}
+.rp-filters .form-label {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: #6B7280;
+    margin-bottom: 0.25rem;
+}
+.rp-filters .form-select,
+.rp-filters .form-control {
+    font-size: 0.88rem;
+    border-radius: 6px;
+}
+
+/* ─── Report Table ──────────────────────────────────── */
+.rp-table-wrap {
+    background: #fff;
+    border-radius: var(--admin-radius);
+    box-shadow: var(--admin-shadow);
+    overflow: hidden;
+}
+.rp-table-wrap .table {
+    margin-bottom: 0;
+}
+.rp-table-wrap .table thead th {
+    background: #001F5B;
+    color: #fff;
+    font-size: 0.82rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 0.75rem 1rem;
+    border: none;
+}
+.rp-table-wrap .table tbody td {
+    padding: 0.7rem 1rem;
+    font-size: 0.88rem;
+    vertical-align: middle;
+}
+
+/* ─── Section Title ──────────────────────────────────── */
+.rp-section-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #001F5B;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+.rp-section-title i {
+    color: #C9A227;
+}
+
+/* ─── Chart Container ────────────────────────────────── */
+.rp-chart-box {
+    background: #fff;
+    border-radius: var(--admin-radius);
+    box-shadow: var(--admin-shadow);
+    padding: 1.25rem;
+    margin-bottom: 1.5rem;
+}
+
+/* ─── Period Buttons (Sales) ─────────────────────────── */
+.rp-period-btn {
+    font-size: 0.82rem;
+    border-radius: 20px;
+    padding: 0.3rem 1rem;
+    border: 1px solid #001F5B;
+    color: #001F5B;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+.rp-period-btn:hover,
+.rp-period-btn.active {
+    background: #001F5B;
+    color: #fff;
+}
+
+/* ─── Export Button Group ────────────────────────────── */
+.rp-export-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+.rp-export-bar .btn {
+    font-size: 0.82rem;
+    border-radius: 6px;
+}
+
+/* ─── Responsive ─────────────────────────────────────── */
+@media (max-width: 768px) {
+    .rp-filters {
+        flex-direction: column;
+    }
+    .rp-filters > * {
+        width: 100%;
+    }
+    .rp-stat-number {
+        font-size: 1.3rem;
+    }
+}
+
+/* ─── Page Header ────────────────────────────────────── */
+.rp-page-header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+.rp-page-header h1 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #001F5B;
+    margin: 0;
+}
+.rp-page-header .breadcrumb {
+    margin: 0;
+    font-size: 0.85rem;
+}

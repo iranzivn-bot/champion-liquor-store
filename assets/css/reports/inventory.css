@@ -1,0 +1,157 @@
+/**
+ * Inventory Module Styles
+ *
+ * Champion Liquor Store Ltd - Admin Inventory UI
+ */
+
+.inv-stat-card {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+    padding: 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    border-left: 4px solid #6B7280;
+    transition: transform 0.2s;
+}
+.inv-stat-card:hover {
+    transform: translateY(-2px);
+}
+.inv-stat-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    flex-shrink: 0;
+}
+.inv-stat-body {
+    flex: 1;
+    min-width: 0;
+}
+.inv-stat-number {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #001F5B;
+    display: block;
+    line-height: 1.2;
+}
+.inv-stat-label {
+    font-size: 0.8rem;
+    color: #6B7280;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+.inv-stat-total    { border-left-color: #001F5B; }
+.inv-stat-total .inv-stat-icon { background: #e3e8f0; color: #001F5B; }
+.inv-stat-instock  { border-left-color: #0B6B2F; }
+.inv-stat-instock .inv-stat-icon { background: #e8f5e9; color: #0B6B2F; }
+.inv-stat-lowstock { border-left-color: #F59E0B; }
+.inv-stat-lowstock .inv-stat-icon { background: #fff8e6; color: #F59E0B; }
+.inv-stat-outstock { border-left-color: #dc3545; }
+.inv-stat-outstock .inv-stat-icon { background: #fde8ea; color: #dc3545; }
+.inv-stat-qty      { border-left-color: #8B5CF6; }
+.inv-stat-qty .inv-stat-icon { background: #f3eeff; color: #8B5CF6; }
+
+.inv-page-header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+.inv-page-header h1 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #001F5B;
+    margin: 0;
+}
+.inv-filters {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+    padding: 1rem 1.25rem;
+    margin-bottom: 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: 0.75rem;
+}
+.inv-filters .form-label {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: #6B7280;
+    margin-bottom: 0.25rem;
+}
+.inv-table-wrap,
+.inv-table {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+    overflow: hidden;
+}
+.inv-table-wrap .table,
+.inv-table .table {
+    margin-bottom: 0;
+}
+.inv-table-wrap .table thead th,
+.inv-table .table thead th {
+    background: #001F5B;
+    color: #fff;
+    font-size: 0.82rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 0.75rem 1rem;
+    border: none;
+}
+.inv-table-wrap .table tbody td,
+.inv-table .table tbody td {
+    padding: 0.7rem 1rem;
+    font-size: 0.88rem;
+    vertical-align: middle;
+}
+
+.inv-td-date {
+    white-space: nowrap;
+    font-size: 0.82rem;
+}
+.inv-td-code {
+    font-size: 0.8rem;
+    color: #6B7280;
+}
+.inv-td-notes {
+    max-width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.inv-section-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #001F5B;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+.inv-section-title i {
+    color: #C9A227;
+}
+.inv-export-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+.inv-export-bar .btn {
+    font-size: 0.82rem;
+    border-radius: 6px;
+}
+@media (max-width: 768px) {
+    .inv-filters { flex-direction: column; }
+    .inv-filters > * { width: 100%; }
+    .inv-stat-number { font-size: 1.3rem; }
+}

@@ -1,0 +1,156 @@
+/* ─── Section Padding Scale ─────────────── */
+.section-sm {
+  padding: var(--space-3xl) 0;
+}
+
+.section-md {
+  padding: var(--space-5xl) 0;
+}
+
+.section-lg {
+  padding: var(--space-7xl) 0;
+}
+
+.section-xl {
+  padding: 7rem 0;
+}
+
+.section-none {
+  padding: 0;
+}
+
+/* ─── Section Backgrounds ───────────────── */
+.section-white {
+  background: var(--color-white);
+}
+
+.section-light {
+  background: var(--color-light);
+}
+
+.section-primary {
+  background: var(--color-primary);
+  color: var(--color-white);
+}
+
+.section-dark {
+  background: var(--color-dark);
+  color: var(--color-white);
+}
+
+.section-gradient {
+  background: var(--bg-gradient-primary);
+  color: var(--color-white);
+}
+
+.section-gold-light {
+  background: var(--color-gold-light);
+}
+
+/* ─── Section Dividers ──────────────────── */
+.section-divider {
+  width: var(--space-5xl);
+  height: 3px;
+  background: var(--color-gold);
+  margin: var(--space-md) 0;
+  border-radius: 2px;
+}
+
+.section-divider-center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ─── Section Title ─────────────────────── */
+.section-title {
+  font-family: var(--font-heading);
+  font-weight: var(--font-weight-bold);
+  font-size: var(--text-3xl);
+  color: var(--color-primary);
+  margin-bottom: var(--space-lg);
+}
+
+.section-subtitle {
+  font-size: var(--text-md);
+  color: var(--text-secondary);
+  max-width: 600px;
+}
+
+/* ─── Hero Section ──────────────────────── */
+.hero-section {
+  background: var(--bg-gradient-primary);
+  color: var(--color-white);
+  padding: var(--space-7xl) 0;
+  min-height: 400px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-section h1 {
+  font-family: var(--font-heading);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-white);
+  margin-bottom: var(--space-lg);
+}
+
+.hero-section p {
+  font-size: var(--text-md);
+  opacity: 0.9;
+  margin-bottom: var(--space-xl);
+}
+
+/* ─── Footer Sections ───────────────────── */
+.footer-section {
+  background: var(--color-primary);
+  color: var(--color-white);
+  padding: var(--space-5xl) 0 var(--space-lg);
+}
+
+.footer-section a {
+  color: rgba(255, 255, 255, 0.7);
+  transition: color var(--transition-fast);
+}
+
+.footer-section a:hover {
+  color: var(--color-gold);
+}
+
+/* ─── Page Header Banner ────────────────── */
+.page-header {
+  background: var(--bg-gradient-primary);
+  color: var(--color-white);
+  padding: var(--space-5xl) 0 var(--space-3xl);
+  text-align: center;
+}
+
+.page-header h1 {
+  font-family: var(--font-heading);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-white);
+  margin-bottom: var(--space-xs);
+}
+
+.page-header p {
+  opacity: 0.88;
+  font-size: var(--text-md);
+}
+
+.page-header-breadcrumb {
+  font-size: var(--text-sm);
+  opacity: 0.75;
+  margin-bottom: var(--space-md);
+}
+
+.page-header-breadcrumb a {
+  color: var(--color-white);
+  opacity: 0.85;
+}
+
+.page-header-breadcrumb a:hover {
+  opacity: 1;
+  color: var(--color-gold);
+}
+
+

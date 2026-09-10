@@ -1,0 +1,233 @@
+/* ─── Primary Gold Button ───────────────── */
+.btn-gold {
+  background: var(--color-gold);
+  color: var(--color-white);
+  border-color: var(--color-gold);
+}
+
+.btn-gold:hover {
+  background: var(--color-gold-dark);
+  border-color: var(--color-gold-dark);
+  color: var(--color-white);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(201, 162, 39, 0.3);
+}
+
+.btn-gold:active {
+  transform: translateY(0);
+}
+
+/* ─── Outline Gold Button ───────────────── */
+.btn-outline-gold {
+  background: transparent;
+  color: var(--color-gold);
+  border: 2px solid var(--color-gold);
+}
+
+.btn-outline-gold:hover {
+  background: var(--color-gold);
+  color: var(--color-white);
+  transform: translateY(-2px);
+}
+
+/* ─── Outline Dark Button ───────────────── */
+.btn-outline-dark {
+  background: transparent;
+  color: var(--color-primary);
+  border: 2px solid var(--color-primary);
+}
+
+.btn-outline-dark:hover {
+  background: var(--color-primary);
+  color: var(--color-white);
+  transform: translateY(-2px);
+}
+
+/* ─── Gold Small Button ─────────────────── */
+.btn-gold-sm {
+  background: var(--color-gold);
+  color: var(--color-white);
+  border: none;
+  padding: 0.4rem 1rem;
+  font-weight: var(--font-weight-semibold);
+  border-radius: var(--radius-button);
+  font-size: var(--text-sm);
+  transition: var(--transition-base);
+}
+
+.btn-gold-sm:hover {
+  background: var(--color-green);
+  color: var(--color-white);
+  transform: translateY(-1px);
+}
+
+/* ─── Auth Button ───────────────────────── */
+.auth-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  height: 54px;
+  border: none;
+  border-radius: var(--radius-auth-btn);
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  font-weight: var(--font-weight-semibold);
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  text-decoration: none;
+  letter-spacing: 0.3px;
+  position: relative;
+  overflow: hidden;
+}
+
+.auth-btn-primary {
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+  color: var(--color-gold);
+  box-shadow: var(--shadow-gold);
+}
+
+.auth-btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 28px rgba(0, 31, 91, 0.35);
+  color: var(--color-gold);
+}
+
+.auth-btn-primary:active {
+  transform: translateY(-1px);
+}
+
+/* ─── Google Button ─────────────────────── */
+.auth-btn-google {
+  background: var(--color-white);
+  color: var(--color-gray-700);
+  border: 2px solid var(--color-gray-200);
+  box-shadow: none;
+}
+
+.auth-btn-google:hover {
+  border-color: var(--color-gold);
+  background: #fafafc;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+}
+
+/* ─── Icon Button ───────────────────────── */
+.btn-icon {
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-md);
+}
+
+.btn-icon-sm {
+  width: 36px;
+  height: 36px;
+}
+
+.btn-icon-lg {
+  width: 54px;
+  height: 54px;
+}
+
+/* ─── Block Button ──────────────────────── */
+.btn-block {
+  width: 100%;
+}
+
+/* ─── Wishlist Toggle ───────────────────── */
+.wishlist-toggle {
+  transition: transform var(--transition-base), background var(--transition-base), color var(--transition-base);
+  background: transparent;
+  color: var(--color-danger);
+  border: 2px solid var(--color-danger);
+}
+
+.wishlist-toggle:hover {
+  transform: scale(1.15);
+}
+
+.wishlist-toggle i {
+  pointer-events: none;
+  font-size: 1.1rem;
+}
+
+.wishlist-toggle.wishlist-active {
+  background: var(--color-danger);
+  color: var(--color-white);
+}
+
+/* ─── Cart Quantity Button ──────────────── */
+.qty-btn,
+.cart-qty-btn {
+  width: 44px;
+  height: 44px;
+  background: var(--color-light);
+  border: 1px solid var(--color-gray-300);
+  font-size: var(--text-lg);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary);
+  cursor: pointer;
+  transition: background var(--transition-fast), color var(--transition-fast);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.qty-btn:hover,
+.cart-qty-btn:hover {
+  background: var(--color-gold);
+  color: var(--color-white);
+}
+
+.cart-qty-btn {
+  width: 36px;
+  height: 36px;
+  font-size: var(--text-md);
+}
+
+/* ─── Button Group ──────────────────────── */
+.btn-group {
+  display: inline-flex;
+  gap: 0;
+}
+
+.btn-group .btn {
+  border-radius: 0;
+}
+
+.btn-group .btn:first-child {
+  border-radius: var(--radius-button) 0 0 var(--radius-button);
+}
+
+.btn-group .btn:last-child {
+  border-radius: 0 var(--radius-button) var(--radius-button) 0;
+}
+
+/* ─── Ripple Effect ─────────────────────── */
+.btn-ripple {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-ripple::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(0);
+  border-radius: 50%;
+  opacity: 0;
+  transition: transform 0.5s, opacity 0.5s;
+  pointer-events: none;
+}
+
+.btn-ripple:active::after {
+  transform: scale(2.5);
+  opacity: 1;
+  transition: 0s;
+}

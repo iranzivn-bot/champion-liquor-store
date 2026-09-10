@@ -1,0 +1,134 @@
+/* ─── Typography Scale ──────────────────── */
+body {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-base);
+  color: var(--text-primary);
+}
+
+/* ─── Headings ──────────────────────────── */
+h1, .h1 {
+  font-family: var(--font-heading);
+  font-weight: var(--font-weight-extrabold);
+  font-size: var(--text-5xl);
+  line-height: var(--line-height-tight);
+  letter-spacing: -1px;
+  color: var(--color-primary);
+}
+
+h2, .h2 {
+  font-family: var(--font-heading);
+  font-weight: var(--font-weight-bold);
+  font-size: var(--text-4xl);
+  line-height: var(--line-height-tight);
+  letter-spacing: -0.5px;
+  color: var(--color-primary);
+}
+
+h3, .h3 {
+  font-family: var(--font-heading);
+  font-weight: var(--font-weight-bold);
+  font-size: var(--text-3xl);
+  line-height: var(--line-height-tight);
+  color: var(--color-primary);
+}
+
+h4, .h4 {
+  font-family: var(--font-heading);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--text-2xl);
+  line-height: var(--line-height-tight);
+  color: var(--color-primary);
+}
+
+h5, .h5 {
+  font-weight: var(--font-weight-bold);
+  font-size: var(--text-lg);
+  line-height: var(--line-height-tight);
+  color: var(--color-primary);
+}
+
+h6, .h6 {
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--text-md);
+  line-height: var(--line-height-tight);
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-wide);
+  color: var(--color-gray-600);
+}
+
+/* ─── Display / Hero Text ───────────────── */
+.display-hero {
+  font-family: var(--font-heading);
+  font-weight: var(--font-weight-black);
+  font-size: var(--text-5xl);
+  line-height: var(--line-height-tight);
+  letter-spacing: -1px;
+}
+
+.display-1 {
+  font-family: var(--font-heading);
+  font-weight: var(--font-weight-extrabold);
+  font-size: var(--text-4xl);
+  line-height: var(--line-height-tight);
+}
+
+/* ─── Body Text ─────────────────────────── */
+.text-body {
+  font-size: var(--text-base);
+  color: var(--text-primary);
+}
+
+.text-secondary {
+  font-size: var(--text-base);
+  color: var(--text-secondary);
+}
+
+/* ─── Caption & Small ───────────────────── */
+.caption {
+  font-size: var(--text-xs);
+  font-weight: var(--font-weight-semibold);
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-wider);
+  color: var(--text-muted);
+}
+
+.small-text {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+}
+
+/* ─── Button / Label Text ───────────────── */
+.btn-text {
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--text-base);
+  letter-spacing: var(--letter-spacing-wide);
+}
+
+/* ─── Price Text ────────────────────────── */
+.price-text {
+  font-size: var(--text-lg);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-green);
+}
+
+.price-text-sm {
+  font-size: var(--text-base);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-green);
+}
+
+/* ─── Utilities ─────────────────────────── */
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+.text-uppercase { text-transform: uppercase; }
+.text-capitalize { text-transform: capitalize; }
+.text-nowrap { white-space: nowrap; }
+.text-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.font-heading { font-family: var(--font-heading); }
+.font-body { font-family: var(--font-body); }

@@ -1,0 +1,34 @@
+/* ─── X-Small (phones, <576px) ──────────── */
+@media (max-width: 575.98px) {
+  .hide-xs { display: none !important; }
+  .show-xs { display: block !important; }
+  .text-xs-center { text-align: center; }
+  .text-xs-sm { font-size: var(--text-sm); }
+  .p-xs-lg { padding: var(--space-lg); }
+}
+
+/* ─── Small (phones, <768px) ────────────── */
+@media (max-width: 767.98px) {
+  .hide-sm { display: none !important; }
+  .show-sm { display: block !important; }
+  .gap-sm-0 { gap: 0; }
+}
+
+/* ─── Medium (tablets, <992px) ──────────── */
+@media (max-width: 991.98px) {
+  .hide-md { display: none !important; }
+  .show-md { display: block !important; }
+  .text-md-center { text-align: center; }
+  .section { padding: var(--space-3xl) 0; }
+}
+
+/* ─── Large (desktops, <1200px) ─────────── */
+@media (max-width: 1199.98px) {
+  .hide-lg { display: none !important; }
+  .show-lg { display: block !important; }
+}
+
+/* ─── X-Large (large desktops, >=1200px) ── */
+@media (min-width: 1200px) {
+  .show-xl { display: block !important; }
+}

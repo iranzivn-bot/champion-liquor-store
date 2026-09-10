@@ -1,0 +1,40 @@
+# ─── Environment & Secrets ───────────────────────────────────────────
+.env
+.env.*
+config.local.php
+
+# ─── Dependencies ────────────────────────────────────────────────────
+node_modules/
+vendor/
+composer.lock
+package-lock.json
+
+# ─── Uploads (user-generated images) ────────────────────────────────
+# Keep directory structure via .gitkeep
+uploads/*
+!uploads/**/.gitkeep
+
+# ─── Backups & Logs ─────────────────────────────────────────────────
+backups/*.sql
+storage/logs/*
+!storage/logs/.gitkeep
+storage/cache/*
+!storage/cache/.gitkeep
+storage/sessions/*
+!storage/sessions/.gitkeep
+storage/exports/*
+!storage/exports/.gitkeep
+storage/framework/maintenance.lock
+
+# ─── IDE & OS ───────────────────────────────────────────────────────
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# ─── Build Artifacts ────────────────────────────────────────────────
+dist/
+*.min.js.map
