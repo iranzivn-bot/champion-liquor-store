@@ -1,56 +1,57 @@
-FROM php:8.3-apache
+# MariaDB 11 base (pulls its own runtime, datadir, and mysql client).
+# We layer Apache + PHP (Debian packages) and drive both processes with
+# supervisord from a custom entrypoint — no dependency on the official
+# mariadb entrypoint's CMD/initdb coupling.
+FROM mariadb:11
 
-# System dependencies (MySQL server bundled into the container)
+# PHP + Apache (Debian packages)
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
-        mariadb-server \
+        apache2 \
+        libapache2-mod-php \
+        php-mysql \
+        php-intl \
+        php-zip \
+        php-curl \
+        php-gd \
+        php-mbstring \
+        php-xml \
+        php-opcache \
+        php-bcmath \
+        supervisor \
         libicu-dev \
-        zlib1g-dev \
         unzip \
         git \
         curl \
-        supervisor \
-    && docker-php-ext-install pdo_mysql mysqli intl opcache \
-    && docker-php-ext-enable opcache \
+        wget \
     && a2enmod rewrite headers \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-# MySQL configuration — bind to localhost only, socket disabled
-RUN mkdir -p /etc/mysql/conf.d \
-    && printf '[mysqld]\nbind-address=127.0.0.1\nskip-networking=0\n' \
-       > /etc/mysql/conf.d/docker.cnf
-
-# MySQL data directory (ephemeral on Render free — acceptable for dev/staging)
-RUN mkdir -p /var/run/mysqld && chown mysql:mysql /var/run/mysqld
-
-# Supervisor: run both MySQL and Apache in the same container
-COPY --chown=root:root docker-supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-
-# PHP/OPcache production tuning
 RUN { \
     echo 'opcache.enable=1'; \
-    echo 'opcache.memory_consumption=64'; \
-    echo 'opcache.max_accelerated_files=5000'; \
-    echo 'opcache.validate_timestamps=0'; \
-    echo 'opcache.revalidate_freq=0'; \
     echo 'opcache.enable_cli=0'; \
     echo 'expose_php=Off'; \
-  } > /usr/local/etc/php/conf.d/opcache.ini
+    echo 'memory_limit=256M'; \
+  } > /etc/php/*/apache2/conf.d/99-production.ini
 
 WORKDIR /var/www/html
 
 COPY . .
 
-RUN mkdir -p storage/framework uploads \
+RUN mkdir -p storage/framework /run/mysqld \
     && chown -R www-data:www-data /var/www/html \
     && chmod -R a+rX /var/www/html \
     && chmod -R u+rwX storage uploads \
-    && chmod +x docker-entrypoint.sh
+    && chmod 755 /run/mysqld \
+    && chmod +x docker-entrypoint.sh \
+    && rm -rf docker-entrypoint-initdb.d
 
-# Render free assigns $PORT at runtime (always 10000 on free)
-# Apache's ports.conf will be rendered by the entrypoint at startup.
+COPY docker-supervisord.conf /etc/supervisor/conf.d/00-main.conf
 
-EXPOSE 80 3306
+# Point supervisord at its config dir (Debian ships an empty supervisord.conf)
+RUN printf '[supervisord]\nnodaemon=true\n[include]\nfiles = /etc/supervisor/conf.d/*.conf\n' > /etc/supervisor/supervisord.conf
+
+EXPOSE 3306
 
 CMD ["sh", "/var/www/html/docker-entrypoint.sh"]

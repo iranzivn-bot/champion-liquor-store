@@ -47,11 +47,13 @@ if ($dbUrl !== false && $dbUrl !== '') {
     }
 }
 if (!defined('DB_HOST')) {
-    define('DB_HOST', getenv('DB_HOST') ?: 'localhost');
-    define('DB_NAME', getenv('DB_NAME') ?: 'champion_store');
-    define('DB_USER', getenv('DB_USER') ?: 'root');
-    define('DB_PASS', getenv('DB_PASS') ?: '');
-    define('DB_PORT', getenv('DB_PORT') ?: 3306);
+    // Fall back to the bundled-MariaDB env vars (Render single-container),
+    // then to plain defaults for local development.
+    define('DB_HOST', getenv('DB_HOST') ?: (getenv('MYSQL_HOST') ?: 'localhost'));
+    define('DB_NAME', getenv('DB_NAME') ?: (getenv('MYSQL_DATABASE') ?: 'champion_store'));
+    define('DB_USER', getenv('DB_USER') ?: (getenv('MYSQL_USER') ?: 'root'));
+    define('DB_PASS', getenv('DB_PASS') !== false ? getenv('DB_PASS') : (getenv('MYSQL_PASSWORD') ?: ''));
+    define('DB_PORT', getenv('DB_PORT') ?: (getenv('MYSQL_PORT') ?: 3306));
     define('DB_CHARSET', 'utf8mb4');
 }
 

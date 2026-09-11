@@ -13,11 +13,10 @@ services:
         value: 127.0.0.1
       - key: DB_PORT
         value: "3306"
-      - key: DB_NAME
+      # Bundled MariaDB bootstrap + app credentials (single source of truth)
+      - key: MYSQL_DATABASE
         value: champion_store
-      - key: DB_USER
+      - key: MYSQL_USER
         value: champion
-      - key: DB_PASS
-        value: ""
-      - key: SKIP_MIGRATIONS
-        value: "0"
+      - key: MYSQL_PASSWORD
+        generateValue: true
