@@ -3,7 +3,7 @@ FROM php:8.3-apache
 # System dependencies (MySQL server bundled into the container)
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
-        mysql-server \
+        mariadb-server \
         libicu-dev \
         zlib1g-dev \
         unzip \

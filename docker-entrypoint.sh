@@ -3,13 +3,13 @@ set -e
 
 PORT="${PORT:-8080}"
 
-echo "[entrypoint] starting MySQL..."
-/usr/sbin/mysqld --user=mysql &
+echo "[entrypoint] starting MariaDB..."
+/usr/sbin/mariadbd --user=mysql &
 MYSQL_PID=$!
 
 echo "[entrypoint] waiting for MySQL to be ready..."
 i=0
-until mysqladmin ping -h 127.0.0.1 --silent 2>/dev/null; do
+until mariadb-admin ping -h 127.0.0.1 --silent 2>/dev/null; do
     i=$((i + 1))
     if [ "$i" -ge 60 ]; then
         echo "[entrypoint] MySQL not reachable after 60s"
@@ -26,10 +26,10 @@ echo "[entrypoint] MySQL is ready."
 DB_NAME="${DB_NAME:-champion_store}"
 DB_USER="${DB_USER:-champion}"
 
-if ! mysql -h 127.0.0.1 -u root -e "USE \`${DB_NAME}\`" 2>/dev/null; then
+if ! mariadb -h 127.0.0.1 -u root -e "USE \`${DB_NAME}\`" 2>/dev/null; then
     echo "[entrypoint] database not found — seeding fresh install..."
-    mysql -h 127.0.0.1 -u root -e "CREATE DATABASE IF NOT EXISTS \`${DB_NAME}\` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
-    mysql -h 127.0.0.1 -u root -e "CREATE USER IF NOT EXISTS '${DB_USER}'@'%' IDENTIFIED BY ''; GRANT ALL PRIVILEGES ON \`${DB_NAME}\`.* TO '${DB_USER}'@'%'; FLUSH PRIVILEGES;"
+    mariadb -h 127.0.0.1 -u root -e "CREATE DATABASE IF NOT EXISTS \`${DB_NAME}\` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
+    mariadb -h 127.0.0.1 -u root -e "CREATE USER IF NOT EXISTS '${DB_USER}'@'%' IDENTIFIED BY ''; GRANT ALL PRIVILEGES ON \`${DB_NAME}\`.* TO '${DB_USER}'@'%'; FLUSH PRIVILEGES;"
     php /var/www/html/database/deploy-db.php || echo "[entrypoint] schema setup reported errors (see above)."
 else
     echo "[entrypoint] database exists — applying outstanding migrations..."
