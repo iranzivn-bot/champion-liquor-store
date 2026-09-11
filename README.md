@@ -241,9 +241,7 @@ Uploaded images organized by type. The `users/` directory is prepared for future
 
 7. **Admin panel** at `http://localhost/champion-liquor-store/admin/`.
 
-### Default Admin Login
-- **Email**: admin@championliquorstore.com
-- **Password**: admin123
+
 
 ---
 
