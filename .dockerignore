@@ -1,0 +1,35 @@
+# ─── VCS ────────────────────────────────────────────────────────────────
+.git
+.gitignore
+
+# ─── Secrets ────────────────────────────────────────────────────────────
+.env
+.env.*
+!*.env.example
+
+# ─── Dependencies & build ───────────────────────────────────────────────
+node_modules/
+vendor/
+composer.lock
+package-lock.json
+dist/
+
+# ─── Local runtime data (not needed in the image) ───────────────────────
+backups/
+storage/logs/
+storage/cache/
+storage/sessions/
+storage/exports/
+storage/tmp/
+storage/framework/maintenance.lock
+uploads/*
+!uploads/*/.gitkeep
+
+# ─── IDE & OS ───────────────────────────────────────────────────────────
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db

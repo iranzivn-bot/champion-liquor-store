@@ -23,8 +23,9 @@ function getDbConnection(): PDO
 
     if ($pdo === null) {
         $dsn = sprintf(
-            'mysql:host=%s;dbname=%s;charset=%s',
+            'mysql:host=%s;port=%d;dbname=%s;charset=%s',
             DB_HOST,
+            defined('DB_PORT') ? DB_PORT : 3306,
             DB_NAME,
             DB_CHARSET
         );

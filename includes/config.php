@@ -30,11 +30,30 @@ if ($docRoot !== '' && str_starts_with($projectDir, $docRoot)) {
 define('SITE_URL', $protocol . '://' . $host . $urlPath . '/');
 
 // ─── Database Credentials ─────────────────────────────────────────────
-define('DB_HOST', 'localhost');
-define('DB_NAME', 'champion_store');
-define('DB_USER', 'root');
-define('DB_PASS', '');
-define('DB_CHARSET', 'utf8mb4');
+// Priority: 1) DATABASE_URL/INTERNAL_DATABASE_URL (Render provides these)
+//           2) individual DB_* environment variables
+//           3) local defaults below
+$dbUrl = getenv('INTERNAL_DATABASE_URL') ?: getenv('DATABASE_URL');
+if ($dbUrl !== false && $dbUrl !== '') {
+    // Format: mysql://user:password@host:port/dbname
+    $dbParsed = parse_url($dbUrl);
+    if ($dbParsed !== false && isset($dbParsed['host'])) {
+        define('DB_HOST', $dbParsed['host']);
+        define('DB_NAME', ltrim($dbParsed['path'] ?? '', '/') ?: 'champion_store');
+        define('DB_USER', rawurldecode($dbParsed['user'] ?? 'root'));
+        define('DB_PASS', rawurldecode($dbParsed['pass'] ?? ''));
+        define('DB_PORT', $dbParsed['port'] ?? 3306);
+        define('DB_CHARSET', 'utf8mb4');
+    }
+}
+if (!defined('DB_HOST')) {
+    define('DB_HOST', getenv('DB_HOST') ?: 'localhost');
+    define('DB_NAME', getenv('DB_NAME') ?: 'champion_store');
+    define('DB_USER', getenv('DB_USER') ?: 'root');
+    define('DB_PASS', getenv('DB_PASS') ?: '');
+    define('DB_PORT', getenv('DB_PORT') ?: 3306);
+    define('DB_CHARSET', 'utf8mb4');
+}
 
 // ─── Paths ────────────────────────────────────────────────────────────
 define('BASE_PATH', dirname(__DIR__) . DIRECTORY_SEPARATOR);
