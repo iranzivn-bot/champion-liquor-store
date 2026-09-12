@@ -20,5 +20,13 @@ printf 'ServerName champion-liquor-store\n' > /etc/apache2/conf-enabled/server-n
 sed -i "s|<VirtualHost \*:80>|<VirtualHost _default_:$PORT>|" /etc/apache2/sites-available/000-default.conf || true
 sed -i "s|<VirtualHost \*:80>|<VirtualHost _default_:$PORT>|" /etc/apache2/sites-available/default-ssl.conf 2>/dev/null || true
 
+# Create the bootstrap lock file deterministically BEFORE supervisord starts any
+# program, so docker-mariadb-wait.sh can never observe it missing (which would
+# let the real mariadbd start while the temporary bootstrap server is still
+# initializing the shared datadir).
+mkdir -p /var/run/champion-store
+: > /var/run/champion-store/bootstrap.lock
+chmod 666 /var/run/champion-store/bootstrap.lock
+
 echo "[boot] starting supervisord (bootstrap → mariadbd + apache)..."
 exec /usr/bin/supervisord -n -c /etc/supervisor/supervisord.conf
