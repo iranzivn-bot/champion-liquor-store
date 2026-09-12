@@ -26,7 +26,8 @@ else
 fi
 
 echo "[boot] starting MariaDB (temporary, pre-supervisord)..."
-/usr/sbin/mariadbd --user=mysql &
+/usr/sbin/mariadbd --user=mysql --bind-address=127.0.0.1 \
+    --innodb-buffer-pool-size=48M --performance-schema=OFF &
 MARIADB_PID=$!
 
 i=0
@@ -67,4 +68,24 @@ wait "$MARIADB_PID" 2>/dev/null || true
 mkdir -p storage/framework storage/sessions storage/cache storage/logs/errors storage/tmp
 
 echo "[boot] starting supervisord (mariadbd + apache)..."
-exec /usr/bin/supervisord -n -c /etc/supervisor/supervisord.conf
+/usr/bin/supervisord -n -c /etc/supervisor/supervisord.conf &
+SUPERVISOR_PID=$!
+
+# Give the real (supervisord-managed) mariadbd time to bind 127.0.0.1:3306 so
+# the first web request never races — otherwise Render restarts us on a 503.
+i=0
+until mariadb-admin ping -h 127.0.0.1 --silent 2>/dev/null; do
+    i=$((i + 1))
+    if ! kill -0 "$SUPERVISOR_PID" 2>/dev/null; then
+        echo "[boot] supervisord exited early."
+        exit 1
+    fi
+    if [ "$i" -ge 90 ]; then
+        echo "[boot] mariadbd still not ready after 90s."
+        exit 1
+    fi
+    sleep 1
+done
+echo "[boot] services ready."
+
+wait "$SUPERVISOR_PID"

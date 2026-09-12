@@ -10,11 +10,11 @@ RUN apt-get update \
         apache2 \
         libapache2-mod-php \
         php-mysql \
+        php-mbstring \
         php-intl \
         php-zip \
         php-curl \
         php-gd \
-        php-mbstring \
         php-xml \
         php-opcache \
         php-bcmath \
@@ -25,15 +25,13 @@ RUN apt-get update \
         curl \
         wget \
     && a2enmod rewrite headers \
+    && sed -i '/^Listen 80$/d' /etc/apache2/apache2.conf \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-RUN { \
-    echo 'opcache.enable=1'; \
-    echo 'opcache.enable_cli=0'; \
-    echo 'expose_php=Off'; \
-    echo 'memory_limit=256M'; \
-  } > /etc/php/*/apache2/conf.d/99-production.ini
+RUN PHP_VERSION=$(ls /etc/php | head -1) \
+    && printf 'opcache.enable=1\nopcache.enable_cli=0\nexpose_php=Off\nmemory_limit=256M\ndate.timezone=UTC\n' \
+       > /etc/php/$PHP_VERSION/apache2/conf.d/99-production.ini
 
 WORKDIR /var/www/html
 
