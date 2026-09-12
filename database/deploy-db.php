@@ -90,6 +90,9 @@ out('  → Applying outstanding migrations...');
 $migrate = __DIR__ . '/migrate.php';
 if (is_file($migrate)) {
     require $migrate;
+    if (function_exists('runMigrations')) {
+        runMigrations();
+    }
 } else {
     out('  ! migrate.php not found — skipping migrations.');
 }

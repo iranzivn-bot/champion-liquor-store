@@ -2,8 +2,9 @@
 /**
  * Health Check Endpoint
  *
- * Used by Render's health check (healthCheckPath: /healthz.php).
- * Returns 200 when the app boots and the database is reachable.
+ * Liveness probe for Render. Returns 200 as soon as the web server answers —
+ * the DB comes up a few seconds later during first-boot bootstrap, so we do
+ * not block the deploy. Use /healthz-db.php for a full DB check.
  * PHP 8.3
  */
 
@@ -11,14 +12,6 @@ declare(strict_types=1);
 
 require_once __DIR__ . '/includes/config.php';
 
-try {
-    $pdo = getDbConnection();
-    $pdo->query('SELECT 1');
-    http_response_code(200);
-    header('Content-Type: application/json; charset=utf-8');
-    echo json_encode(['status' => 'ok', 'env' => ENVIRONMENT]);
-} catch (\Throwable $e) {
-    http_response_code(503);
-    header('Content-Type: application/json; charset=utf-8');
-    echo json_encode(['status' => 'degraded', 'error' => 'database unavailable']);
-}
+http_response_code(200);
+header('Content-Type: application/json; charset=utf-8');
+echo json_encode(['status' => 'ok', 'env' => ENVIRONMENT]);

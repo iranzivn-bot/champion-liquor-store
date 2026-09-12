@@ -1,10 +1,9 @@
-# MariaDB 11 base (pulls its own runtime, datadir, and mysql client).
-# We layer Apache + PHP (Debian packages) and drive both processes with
-# supervisord from a custom entrypoint — no dependency on the official
-# mariadb entrypoint's CMD/initdb coupling.
+# MariaDB 11 base (pulls its own runtime, datadir, and mysql client) with
+# Apache + PHP (Debian packages). supervisord drives bootstrap → mariadbd and
+# Apache; the custom entrypoint renders the Render web port immediately.
 FROM mariadb:11
 
-# PHP + Apache (Debian packages)
+# PHP + Apache + flock (Debian packages)
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
         apache2 \
@@ -19,13 +18,13 @@ RUN apt-get update \
         php-opcache \
         php-bcmath \
         supervisor \
+        util-linux \
         libicu-dev \
         unzip \
         git \
         curl \
         wget \
     && a2enmod rewrite headers \
-    && sed -i '/^Listen 80$/d' /etc/apache2/apache2.conf \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
@@ -35,6 +34,9 @@ RUN PHP_VERSION=$(ls /etc/php | head -1) \
 
 WORKDIR /var/www/html
 
+# Persist the bundled MariaDB datadir across container restarts on Render.
+VOLUME /var/lib/mysql
+
 COPY . .
 
 RUN mkdir -p storage/framework storage/logs/errors storage/cache storage/sessions storage/exports storage/tmp uploads \
@@ -42,7 +44,7 @@ RUN mkdir -p storage/framework storage/logs/errors storage/cache storage/session
     && chown -R www-data:www-data /var/www/html \
     && chmod -R a+rX /var/www/html \
     && chmod 755 /run/mysqld \
-    && chmod +x docker-entrypoint.sh \
+    && chmod +x docker-entrypoint.sh docker-bootstrap.sh docker-mariadb-wait.sh \
     && rm -rf docker-entrypoint-initdb.d
 
 COPY docker-supervisord.conf /etc/supervisor/conf.d/00-main.conf

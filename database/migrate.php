@@ -19,6 +19,16 @@ declare(strict_types=1);
 require_once __DIR__ . '/../includes/config.php';
 require_once __DIR__ . '/../includes/db.php';
 
+/**
+ * Run migrations.
+ *
+ * Accepts an optional PDO connection so container bootstrap phases (which run
+ * against a temp server over a Unix socket) can pass their own connection.
+ * Defaults to the app's regular getDbConnection() when called standalone.
+ */
+function runMigrations(?PDO $pdo = null): void
+{
+
 // ─── Helpers ──────────────────────────────────────────────────────────
 
 function writeln(string $line): void
@@ -56,7 +66,7 @@ writeln('');
 writeln('═══ Champion Liquor Store — Migration Runner ═══');
 writeln('');
 
-$pdo = getDbConnection();
+$pdo = $pdo ?? getDbConnection();
 
 // 1. Ensure migrations tracking table exists
 $pdo->exec("
@@ -85,7 +95,7 @@ sort($files);
 if (empty($files)) {
     writeln('No migration files found in database/ directory.');
     writeln('');
-    exit(0);
+    return;
 }
 
 // 4. Determine batch number
@@ -133,3 +143,4 @@ if ($errorCount > 0) {
 writeln('');
 writeln('Migration complete.');
 writeln('');
+}

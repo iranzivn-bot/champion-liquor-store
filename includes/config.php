@@ -143,9 +143,11 @@ if (isset($_GET['lang'])) {
 }
 
 // ─── HTTPS Redirect ──────────────────────────────────────────────────
-// In production, redirect all HTTP traffic to HTTPS.
+// In production, redirect all HTTP traffic to HTTPS — except health-check
+// endpoints, which Render probes over plain HTTP to the web port.
 if (ENVIRONMENT === 'production' && PHP_SAPI !== 'cli') {
-    if (!isset($_SERVER['HTTPS']) || $_SERVER['HTTPS'] !== 'on') {
+    $healthz = strpos($_SERVER['REQUEST_URI'] ?? '', '/healthz') === 0;
+    if (!$healthz && (!isset($_SERVER['HTTPS']) || $_SERVER['HTTPS'] !== 'on')) {
         $redirectUrl = 'https://' . ($_SERVER['HTTP_HOST'] ?? 'localhost') . ($_SERVER['REQUEST_URI'] ?? '');
         header('HTTP/1.1 301 Moved Permanently');
         header('Location: ' . $redirectUrl);
