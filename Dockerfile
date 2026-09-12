@@ -37,10 +37,10 @@ WORKDIR /var/www/html
 
 COPY . .
 
-RUN mkdir -p storage/framework /run/mysqld \
+RUN mkdir -p storage/framework storage/logs/errors storage/cache storage/sessions storage/exports storage/tmp uploads \
+    && find uploads storage -type d -exec chmod u+rwX {} + \
     && chown -R www-data:www-data /var/www/html \
     && chmod -R a+rX /var/www/html \
-    && chmod -R u+rwX storage uploads \
     && chmod 755 /run/mysqld \
     && chmod +x docker-entrypoint.sh \
     && rm -rf docker-entrypoint-initdb.d

@@ -14,16 +14,22 @@ composer.lock
 package-lock.json
 dist/
 
-# ─── Local runtime data (not needed in the image) ───────────────────────
-backups/
-storage/logs/
-storage/cache/
-storage/sessions/
-storage/exports/
-storage/tmp/
+# ─── Local runtime data (not needed in the image — keep dir structure) ──
+backups/*
+!backups/**/.gitkeep
+storage/logs/*
+!storage/logs/**/.gitkeep
+storage/cache/*
+!storage/cache/**/.gitkeep
+storage/sessions/*
+!storage/sessions/**/.gitkeep
+storage/exports/*
+!storage/exports/**/.gitkeep
+storage/tmp/*
+!storage/tmp/**/.gitkeep
 storage/framework/maintenance.lock
 uploads/*
-!uploads/*/.gitkeep
+!uploads/**/.gitkeep
 
 # ─── IDE & OS ───────────────────────────────────────────────────────────
 .idea/
